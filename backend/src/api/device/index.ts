@@ -1,0 +1,30 @@
+export default (app) => {
+  app.post(
+    `/tenant/:tenantId/device`,
+    require('./deviceCreate').default,
+  );
+  app.put(
+    `/tenant/:tenantId/device/:id`,
+    require('./deviceUpdate').default,
+  );
+  app.post(
+    `/tenant/:tenantId/device/import`,
+    require('./deviceImport').default,
+  );
+  app.delete(
+    `/tenant/:tenantId/device`,
+    require('./deviceDestroy').default,
+  );
+  app.get(
+    `/tenant/:tenantId/device/autocomplete`,
+    require('./deviceAutocomplete').default,
+  );
+  app.get(
+    `/tenant/:tenantId/device`,
+    require('./deviceList').default,
+  );
+  app.get(
+    `/tenant/:tenantId/device/:id`,
+    require('./deviceFind').default,
+  );
+};
