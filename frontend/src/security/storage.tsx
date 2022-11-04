@@ -10,13 +10,6 @@
 export default class Storage {
   static get values() {
     return {
-
-
-
-
-
-
-
       settingsLogos: {
         id: 'settingsLogos',
         folder: 'tenant/:tenantId/settings/logos',

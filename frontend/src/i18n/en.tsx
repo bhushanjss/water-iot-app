@@ -444,9 +444,17 @@ const en = {
       label: 'Admin',
       description: 'Full access to all resources',
     },
-    custom: {
-      label: 'Custom Role',
-      description: 'Custom role access',
+    user: {
+      label: 'User',
+      description: 'User Access',
+    },
+    device: {
+      label: 'Device',
+      description: 'Device Access',
+    },
+    researcher: {
+      label: 'Researcher',
+      description: 'Researcher Access',
     },
   },
 
