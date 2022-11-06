@@ -18,6 +18,7 @@ import waterReadingEnumerators from 'src/modules/waterReading/waterReadingEnumer
 import moment from 'moment';
 import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
 import DeviceAutocompleteFormItem from 'src/view/device/autocomplete/DeviceAutocompleteFormItem';
+import AddressAutocompleteFormItem from "../../address/autocomplete/AddressAutocompleteFormItem";
 
 const schema = yup.object().shape({
   user: yupFormSchemas.relationToOne(
@@ -27,6 +28,10 @@ const schema = yup.object().shape({
   device: yupFormSchemas.relationToOne(
     i18n('entities.waterReading.fields.device'),
     {},
+  ),
+  location: yupFormSchemas.relationToOne(
+      i18n('entities.person.fields.location'),
+      {},
   ),
   dateTime: yupFormSchemas.datetime(
     i18n('entities.waterReading.fields.dateTime'),
@@ -241,6 +246,7 @@ function WaterReadingForm(props) {
     return {
       user: record.user,
       device: record.device,
+      location: record.location,
       dateTime: record.dateTime ? moment(record.dateTime) : null,
       type: record.type,
       source: record.source,
@@ -316,6 +322,14 @@ function WaterReadingForm(props) {
                 label={i18n('entities.waterReading.fields.device')}
                 required={false}
                 showCreate={!props.modal}
+              />
+            </Grid>
+            <Grid item lg={7} md={8} sm={12} xs={12}>
+              <AddressAutocompleteFormItem
+                  name="location"
+                  label={i18n('entities.waterReading.fields.location')}
+                  required={false}
+                  showCreate={!props.modal}
               />
             </Grid>
             <Grid item lg={7} md={8} sm={12} xs={12}>

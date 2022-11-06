@@ -192,6 +192,7 @@ const en = {
           id: 'Id',
           'user': 'User',
           'device': 'Device',
+          'location': 'Location',
           'dateTimeRange': 'DateTime',
           'dateTime': 'DateTime',
           'type': 'Type',
@@ -272,10 +273,10 @@ const en = {
           },
           'source': {
             'tap': 'Tap',
-            'ro': 'Ro',
-            'dug_well': 'Dug_well',
-            'tube_well': 'Tube_well',
-            'hand_pump': 'Hand_pump',
+            'ro': 'RO',
+            'dug_well': 'Dug Well',
+            'tube_well': 'Tube Well',
+            'hand_pump': 'Hand Pump',
             'other': 'Other',
           },
         },
@@ -641,7 +642,7 @@ const en = {
   },
   dashboard: {
     menu: 'Dashboard',
-    message: `This page uses fake data for demonstration purposes only. You can edit it at frontend/view/dashboard/DashboardPage.ts.`,
+    message: `My Beautiful Wife Dona`,
     charts: {
       day: 'Day',
       red: 'Red',

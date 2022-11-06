@@ -4,6 +4,7 @@ import { IServiceOptions } from './IServiceOptions';
 import WaterReadingRepository from '../database/repositories/waterReadingRepository';
 import DeviceRepository from '../database/repositories/deviceRepository';
 import UserRepository from '../database/repositories/userRepository';
+import AddressRepository from "../database/repositories/addressRepository";
 
 export default class WaterReadingService {
   options: IServiceOptions;
@@ -20,6 +21,7 @@ export default class WaterReadingService {
     try {
       data.user = await UserRepository.filterIdInTenant(data.user, { ...this.options, session });
       data.device = await DeviceRepository.filterIdInTenant(data.device, { ...this.options, session });
+      data.location = await AddressRepository.filterIdInTenant(data.location, { ...this.options, session });
 
       const record = await WaterReadingRepository.create(data, {
         ...this.options,
@@ -50,6 +52,7 @@ export default class WaterReadingService {
     try {
       data.user = await UserRepository.filterIdInTenant(data.user, { ...this.options, session });
       data.device = await DeviceRepository.filterIdInTenant(data.device, { ...this.options, session });
+      data.location = await AddressRepository.filterIdInTenant(data.location, { ...this.options, session });
 
       const record = await WaterReadingRepository.update(
         id,

@@ -164,7 +164,8 @@ class WaterReadingRepository {
       WaterReading(options.database)
         .findOne({_id: id, tenant: currentTenant.id})
       .populate('user')
-      .populate('device'),
+      .populate('device')
+      .populate('location'),
       options,
     );
 
@@ -208,6 +209,14 @@ class WaterReadingRepository {
         criteriaAnd.push({
           device: MongooseQueryUtils.uuid(
             filter.device,
+          ),
+        });
+      }
+
+      if (filter.location) {
+        criteriaAnd.push({
+          location: MongooseQueryUtils.uuid(
+              filter.location,
           ),
         });
       }
@@ -920,7 +929,8 @@ class WaterReadingRepository {
       .limit(limitEscaped)
       .sort(sort)
       .populate('user')
-      .populate('device');
+      .populate('device')
+      .populate('location');
 
     const count = await WaterReading(
       options.database,

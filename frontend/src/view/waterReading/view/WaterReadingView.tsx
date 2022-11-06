@@ -5,6 +5,7 @@ import TextViewItem from 'src/view/shared/view/TextViewItem';
 import UserViewItem from 'src/view/user/view/UserViewItem';
 import moment from 'moment';
 import DeviceViewItem from 'src/view/device/view/DeviceViewItem';
+import AddressViewItem from "../../address/view/AddressViewItem";
 
 function WaterReadingView(props) {
   const renderView = () => {
@@ -21,7 +22,10 @@ function WaterReadingView(props) {
           label={i18n('entities.waterReading.fields.device')}
           value={record.device}
         />
-
+        <AddressViewItem
+          label={i18n('entities.person.fields.location')}
+          value={record.location}
+        />
         <TextViewItem
           label={i18n(
             'entities.waterReading.fields.dateTime',

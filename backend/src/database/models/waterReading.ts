@@ -18,6 +18,10 @@ export default (database) => {
         type: Schema.Types.ObjectId,
         ref: 'device',
       },
+      location: {
+        type: Schema.Types.ObjectId,
+        ref: 'address',
+      },
       dateTime: {
         type: Date,
       },

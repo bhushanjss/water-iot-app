@@ -30,13 +30,6 @@ export default class Storage {
         maxSizeInBytes: 10 * 1024 * 1024,
         publicRead: true,
       },
-
-
-
-
-
-
-
     };
   }
 }

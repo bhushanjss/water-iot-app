@@ -26,6 +26,7 @@ import TableCellCustom from 'src/view/shared/table/TableCellCustom';
 import UserListItem from 'src/view/user/list/UserListItem';
 import moment from 'moment';
 import DeviceListItem from 'src/view/device/list/DeviceListItem';
+import AddressListItem from "../../address/list/AddressListItem";
 
 function WaterReadingListTable(props) {
   const [
@@ -137,6 +138,11 @@ function WaterReadingListTable(props) {
                 label={i18n(
                   'entities.waterReading.fields.device',
                 )}
+              />
+              <TableCellCustom
+                  label={i18n(
+                      'entities.waterReading.fields.location',
+                  )}
               />
               <TableCellCustom
                 onSort={doChangeSort}
@@ -528,6 +534,9 @@ function WaterReadingListTable(props) {
                 </TableCell>
                 <TableCell>
                   <DeviceListItem value={row.device} />
+                </TableCell>
+                <TableCell>
+                  <AddressListItem value={row.location} />
                 </TableCell>
                 <TableCell>
                   {row.dateTime
