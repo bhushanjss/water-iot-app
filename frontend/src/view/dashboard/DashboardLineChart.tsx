@@ -11,6 +11,8 @@ const data = {
     i18n('dashboard.charts.months.5'),
     i18n('dashboard.charts.months.6'),
     i18n('dashboard.charts.months.7'),
+    i18n('dashboard.charts.months.8'),
+    i18n('dashboard.charts.months.9'),
   ],
   datasets: [
     {
@@ -32,7 +34,7 @@ const data = {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: [65, 59, 80, 81, 56, 55, 40],
+      data: [65, 59, 80, 81, 56, 55, 40, 1, 10],
     },
   ],
 };

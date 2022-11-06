@@ -34,49 +34,49 @@ function DashboardPage(props) {
         }}
       >
         <Grid spacing={2} container>
-          <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
-            <div className={classes.chartWrapper}>
-              <DashboardDoughnutChart />
-            </div>
-          </Grid>
-          <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
-            <div className={classes.chartWrapper}>
-              <DashboardMixChartTwo />
-            </div>
-          </Grid>
-          <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
-            <div className={classes.chartWrapper}>
-              <DashboardBarChart />
-            </div>
-          </Grid>
+          {/*<Grid item xl={4} lg={4} md={6} sm={12} xs={12}>*/}
+          {/*  <div className={classes.chartWrapper}>*/}
+          {/*    <DashboardDoughnutChart />*/}
+          {/*  </div>*/}
+          {/*</Grid>*/}
+          {/*<Grid item xl={4} lg={4} md={6} sm={12} xs={12}>*/}
+          {/*  <div className={classes.chartWrapper}>*/}
+          {/*    <DashboardMixChartTwo />*/}
+          {/*  </div>*/}
+          {/*</Grid>*/}
+          {/*<Grid item xl={4} lg={4} md={6} sm={12} xs={12}>*/}
+          {/*  <div className={classes.chartWrapper}>*/}
+          {/*    <DashboardBarChart />*/}
+          {/*  </div>*/}
+          {/*</Grid>*/}
 
-          <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
-            <div className={classes.chartWrapper}>
-              <DashboardMixChartOne />
-            </div>
-          </Grid>
+          {/*<Grid item xl={6} lg={6} md={6} sm={12} xs={12}>*/}
+          {/*  <div className={classes.chartWrapper}>*/}
+          {/*    <DashboardMixChartOne />*/}
+          {/*  </div>*/}
+          {/*</Grid>*/}
 
-          <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
-            <div className={classes.chartWrapper}>
-              <DashboardPolarChart />
-            </div>
-          </Grid>
+          {/*<Grid item xl={6} lg={6} md={6} sm={12} xs={12}>*/}
+          {/*  <div className={classes.chartWrapper}>*/}
+          {/*    <DashboardPolarChart />*/}
+          {/*  </div>*/}
+          {/*</Grid>*/}
 
-          <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
-            <div className={classes.chartWrapper}>
-              <DashboardHorizontalBarChart />
-            </div>
-          </Grid>
+          {/*<Grid item xl={4} lg={4} md={6} sm={12} xs={12}>*/}
+          {/*  <div className={classes.chartWrapper}>*/}
+          {/*    <DashboardHorizontalBarChart />*/}
+          {/*  </div>*/}
+          {/*</Grid>*/}
           <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
             <div className={classes.chartWrapper}>
               <DashboardLineChart />
             </div>
           </Grid>
-          <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
-            <div className={classes.chartWrapper}>
-              <DashboardRadarChart />
-            </div>
-          </Grid>
+          {/*<Grid item xl={4} lg={4} md={6} sm={12} xs={12}>*/}
+          {/*  <div className={classes.chartWrapper}>*/}
+          {/*    <DashboardRadarChart />*/}
+          {/*  </div>*/}
+          {/*</Grid>*/}
         </Grid>
 
         <p
