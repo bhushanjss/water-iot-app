@@ -1,5 +1,5 @@
 import { Grid, makeStyles } from '@material-ui/core';
-import React from 'react';
+import React, {useEffect} from 'react';
 import { i18n } from 'src/i18n';
 import DashboardBarChart from 'src/view/dashboard/DashboardBarChart';
 import DashboardDoughnutChart from 'src/view/dashboard/DashboardDoughnutChart';
@@ -9,6 +9,9 @@ import DashboardMixChartOne from 'src/view/dashboard/DashboardMixChartOne';
 import DashboardMixChartTwo from 'src/view/dashboard/DashboardMixChartTwo';
 import DashboardPolarChart from 'src/view/dashboard/DashboardPolarChart';
 import DashboardRadarChart from 'src/view/dashboard/DashboardRadarChart';
+import {useDispatch, useSelector} from "react-redux";
+import selectors from "../../modules/waterReading/list/waterReadingListSelectors";
+import actions from "../../modules/waterReading/list/waterReadingListActions";
 
 const useStyles = makeStyles((theme) => ({
   chartWrapper: {
@@ -25,6 +28,16 @@ const useStyles = makeStyles((theme) => ({
 
 function DashboardPage(props) {
   const classes = useStyles();
+
+  const rawFilter = useSelector(selectors.selectRawFilter);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+      dispatch(actions.doFetch());
+      // eslint-disable-next-line
+  }, [dispatch]);
+
+const waterReadings = useSelector(selectors.selectRows);
 
   return (
     <>
@@ -69,7 +82,7 @@ function DashboardPage(props) {
           {/*</Grid>*/}
           <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
             <div className={classes.chartWrapper}>
-              <DashboardLineChart />
+              <DashboardLineChart readings={waterReadings} />
             </div>
           </Grid>
           {/*<Grid item xl={4} lg={4} md={6} sm={12} xs={12}>*/}
