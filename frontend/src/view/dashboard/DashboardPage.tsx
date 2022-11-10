@@ -12,6 +12,7 @@ import DashboardRadarChart from 'src/view/dashboard/DashboardRadarChart';
 import {useDispatch, useSelector} from "react-redux";
 import selectors from "../../modules/waterReading/list/waterReadingListSelectors";
 import actions from "../../modules/waterReading/list/waterReadingListActions";
+import DashboardService from "../../modules/dashboard/dashboardService";
 
 const useStyles = makeStyles((theme) => ({
   chartWrapper: {
@@ -33,11 +34,14 @@ function DashboardPage(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-      dispatch(actions.doFetch());
+      dispatch( actions.doChangeSort({field: 'dateTime', order: 'asc'}));
+      // dispatch(actions.doFetch());
       // eslint-disable-next-line
   }, [dispatch]);
 
 const waterReadings = useSelector(selectors.selectRows);
+const group1Readings = DashboardService.getGroup1Data(waterReadings);
+const pHReadings = DashboardService.getpHData(waterReadings);
 
   return (
     <>
@@ -82,7 +86,12 @@ const waterReadings = useSelector(selectors.selectRows);
           {/*</Grid>*/}
           <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
             <div className={classes.chartWrapper}>
-              <DashboardLineChart readings={waterReadings} />
+              <DashboardLineChart readings={group1Readings} />
+            </div>
+          </Grid>
+          <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
+            <div className={classes.chartWrapper}>
+                <DashboardLineChart readings={pHReadings} />
             </div>
           </Grid>
           {/*<Grid item xl={4} lg={4} md={6} sm={12} xs={12}>*/}
