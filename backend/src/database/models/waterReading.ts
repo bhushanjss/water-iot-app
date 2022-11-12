@@ -42,7 +42,10 @@ export default (database) => {
           "ro",
           "dug_well",
           "tube_well",
+          "bore_well",
           "hand_pump",
+          "monitoring",
+          "nhs",
           "other",
           null
         ],
