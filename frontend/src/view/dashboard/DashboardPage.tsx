@@ -32,16 +32,27 @@ function DashboardPage(props) {
 
   const rawFilter = useSelector(selectors.selectRawFilter);
   const dispatch = useDispatch();
-
+  // const locationId = "636feb4d22dfe967052f9451"; //Robertsganj
+  // const locationId = "636feb8a22dfe967052fbb35"; //Anpara
+  // const locationId = "636feb4122dfe967052f8d26"; //Barara, Ambala, Haryana
+   const locationId = "636feb3a22dfe967052f887e"; //good
+  //   const locationId = "636feb3522dfe967052f85e1";
+  //   const locationId = "636feb3422dfe967052f8526"; //OK
+  //   const locationId = "636feb2e22dfe967052f81ec"; //Has TDS
   useEffect(() => {
-      dispatch( actions.doChangeSort({field: 'dateTime', order: 'asc'}));
-      // dispatch(actions.doFetch());
+      // dispatch( actions.doChangeAddSort({field: 'dateTime', order: 'asc'}));
+      dispatch(actions.doFetchUserDataFilter(locationId));
       // eslint-disable-next-line
   }, [dispatch]);
 
-const waterReadings = useSelector(selectors.selectRows);
-const group1Readings = DashboardService.getGroup1Data(waterReadings);
+const waterReadings:Array<any> = useSelector(selectors.selectRows);
+const waterReadingDesc = waterReadings.reverse();
+const tdsReadings = DashboardService.getTDSData(waterReadings);
 const pHReadings = DashboardService.getpHData(waterReadings);
+const conductivityReadings = DashboardService.getConductivityData(waterReadings);
+// const turbidityReadings = DashboardService.getTurbidityData(waterReadings);
+// const temperatureReadings = DashboardService.getTemperatureData(waterReadings);
+// const group1Readings = DashboardService.getGroup1Data(waterReadings);
 
   return (
     <>
@@ -84,16 +95,31 @@ const pHReadings = DashboardService.getpHData(waterReadings);
           {/*    <DashboardHorizontalBarChart />*/}
           {/*  </div>*/}
           {/*</Grid>*/}
-          <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
-            <div className={classes.chartWrapper}>
-              <DashboardLineChart readings={group1Readings} />
-            </div>
-          </Grid>
+            <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
+                <div className={classes.chartWrapper}>
+                    <DashboardLineChart readings={tdsReadings} />
+                </div>
+            </Grid>
           <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
             <div className={classes.chartWrapper}>
                 <DashboardLineChart readings={pHReadings} />
             </div>
           </Grid>
+            <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
+                <div className={classes.chartWrapper}>
+                    <DashboardLineChart readings={conductivityReadings} />
+                </div>
+            </Grid>
+            {/*<Grid item xl={4} lg={4} md={6} sm={12} xs={12}>*/}
+            {/*    <div className={classes.chartWrapper}>*/}
+            {/*        <DashboardLineChart readings={temperatureReadings} />*/}
+            {/*    </div>*/}
+            {/*</Grid>*/}
+            {/*<Grid item xl={4} lg={4} md={6} sm={12} xs={12}>*/}
+            {/*    <div className={classes.chartWrapper}>*/}
+            {/*        <DashboardLineChart readings={turbidityReadings} />*/}
+            {/*    </div>*/}
+            {/*</Grid>*/}
           {/*<Grid item xl={4} lg={4} md={6} sm={12} xs={12}>*/}
           {/*  <div className={classes.chartWrapper}>*/}
           {/*    <DashboardRadarChart />*/}

@@ -29,6 +29,7 @@ import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import waterReadingEnumerators from 'src/modules/waterReading/waterReadingEnumerators';
 import DatePickerRangeFormItem from 'src/view/shared/form/items/DatePickerRangeFormItem';
 import DeviceAutocompleteFormItem from 'src/view/device/autocomplete/DeviceAutocompleteFormItem';
+import AddressAutocompleteFormItem from "../../address/autocomplete/AddressAutocompleteFormItem";
 
 const schema = yup.object().shape({
   user: yupFilterSchemas.relationToOne(
@@ -36,6 +37,9 @@ const schema = yup.object().shape({
   ),
   device: yupFilterSchemas.relationToOne(
     i18n('entities.waterReading.fields.device'),
+  ),
+  location: yupFilterSchemas.relationToOne(
+      i18n('entities.waterReading.fields.location'),
   ),
   dateTimeRange: yupFilterSchemas.datetimeRange(
     i18n('entities.waterReading.fields.dateTimeRange'),
@@ -147,6 +151,7 @@ const schema = yup.object().shape({
 const emptyValues = {
   user: null,
   device: null,
+  location: null,
   dateTimeRange: [],
   type: null,
   source: null,
@@ -193,6 +198,10 @@ const previewRenders = {
       label: i18n('entities.waterReading.fields.device'),
       render: filterRenders.relationToOne(),
     },
+  location: {
+    label: i18n('entities.waterReading.fields.location'),
+    render: filterRenders.relationToOne(),
+  },
   dateTimeRange: {
     label: i18n('entities.waterReading.fields.dateTimeRange'),
     render: filterRenders.datetimeRange(),

@@ -107,12 +107,30 @@ const waterReadingListActions = {
     dispatch(waterReadingListActions.doFetchCurrentFilter());
   },
 
+  doChangeAddSort: (sorter) => async (dispatch, getState) => {
+    dispatch({
+      type: waterReadingListActions.SORTER_CHANGED,
+      payload: sorter,
+    });
+  },
+
   doFetchCurrentFilter: () => async (
     dispatch,
     getState,
   ) => {
     const filter = selectors.selectFilter(getState());
     const rawFilter = selectors.selectRawFilter(getState());
+    dispatch(waterReadingListActions.doFetch(filter, rawFilter, true));
+  },
+
+  doFetchUserDataFilter: (locationId: string) => async (
+      dispatch,
+      getState
+  ) => {
+    let filter = selectors.selectFilter(getState());
+    let rawFilter = selectors.selectRawFilter(getState());
+    filter = {...filter, location: locationId};
+    rawFilter = {...rawFilter, location: locationId};
     dispatch(waterReadingListActions.doFetch(filter, rawFilter, true));
   },
 
