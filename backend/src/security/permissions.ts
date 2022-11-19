@@ -123,12 +123,12 @@ class Permissions {
       },
       addressImport: {
         id: 'addressImport',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.researcher],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
       },
       addressCreate: {
         id: 'addressCreate',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.user, roles.researcher],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
         allowedStorage: [
 
@@ -136,7 +136,7 @@ class Permissions {
       },
       addressEdit: {
         id: 'addressEdit',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.user, roles.researcher],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
         allowedStorage: [
 
@@ -144,7 +144,7 @@ class Permissions {
       },
       addressDestroy: {
         id: 'addressDestroy',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.user, roles.researcher],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
         allowedStorage: [
 
@@ -152,12 +152,12 @@ class Permissions {
       },
       addressRead: {
         id: 'addressRead',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.user, roles.researcher],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
       },
       addressAutocomplete: {
         id: 'addressAutocomplete',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.user, roles.researcher],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
       },
 
@@ -192,23 +192,23 @@ class Permissions {
       },
       personRead: {
         id: 'personRead',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.researcher],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
       },
       personAutocomplete: {
         id: 'personAutocomplete',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.researcher],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
       },
 
       waterReadingImport: {
         id: 'waterReadingImport',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.researcher],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
       },
       waterReadingCreate: {
         id: 'waterReadingCreate',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.user, roles.researcher, roles.device],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
         allowedStorage: [
 
@@ -216,7 +216,7 @@ class Permissions {
       },
       waterReadingEdit: {
         id: 'waterReadingEdit',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.user, roles.researcher],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
         allowedStorage: [
 
@@ -224,7 +224,7 @@ class Permissions {
       },
       waterReadingDestroy: {
         id: 'waterReadingDestroy',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.user, roles.researcher],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
         allowedStorage: [
 
@@ -232,12 +232,12 @@ class Permissions {
       },
       waterReadingRead: {
         id: 'waterReadingRead',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.user, roles.researcher],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
       },
       waterReadingAutocomplete: {
         id: 'waterReadingAutocomplete',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.user, roles.researcher],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
       },
 
@@ -248,7 +248,7 @@ class Permissions {
       },
       deviceCreate: {
         id: 'deviceCreate',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.user],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
         allowedStorage: [
 
@@ -256,7 +256,7 @@ class Permissions {
       },
       deviceEdit: {
         id: 'deviceEdit',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.user],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
         allowedStorage: [
 
@@ -264,7 +264,7 @@ class Permissions {
       },
       deviceDestroy: {
         id: 'deviceDestroy',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.user],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
         allowedStorage: [
 
@@ -272,14 +272,14 @@ class Permissions {
       },
       deviceRead: {
         id: 'deviceRead',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.user, roles.researcher],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
       },
       deviceAutocomplete: {
         id: 'deviceAutocomplete',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.user, roles.researcher],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
-      },      
+      },
     };
   }
 
