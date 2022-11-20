@@ -97,9 +97,9 @@ export default class DeviceService {
     return DeviceRepository.findById(id, this.options);
   }
 
-  async findAllAutocomplete(search, limit) {
+  async findAllAutocomplete(query, limit) {
     return DeviceRepository.findAllAutocomplete(
-      search,
+      query,
       limit,
       this.options,
     );
