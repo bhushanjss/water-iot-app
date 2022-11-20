@@ -14,7 +14,10 @@ function DeviceView(props) {
           label={i18n('entities.device.fields.label')}
           value={record.label}
         />
-
+          <TextViewItem
+              label={i18n('entities.device.fields.id')}
+              value={record.id}
+          />
         <TextViewItem
           label={i18n('entities.device.fields.deviceId')}
           value={record.deviceId}

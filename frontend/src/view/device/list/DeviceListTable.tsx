@@ -136,6 +136,15 @@ function DeviceListTable(props) {
                 )}
               />
               <TableCellCustom
+                  onSort={doChangeSort}
+                  hasRows={hasRows}
+                  sorter={sorter}
+                  name={'id'}
+                  label={i18n(
+                      'entities.device.fields.id',
+                  )}
+              />
+              <TableCellCustom
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
@@ -207,6 +216,7 @@ function DeviceListTable(props) {
                     />
                   </TableCell>
                 <TableCell>{row.label}</TableCell>
+                <TableCell>{row.id}</TableCell>
                 <TableCell>{row.deviceId}</TableCell>
                 <TableCell>{row.serialNumber}</TableCell>
                 <TableCell>
