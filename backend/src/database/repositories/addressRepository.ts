@@ -317,6 +317,14 @@ class AddressRepository {
         });
       }
 
+      if (filter.createdBy) {
+        criteriaAnd.push({
+          createdBy: MongooseQueryUtils.uuid(
+              filter.createdBy,
+          ),
+        });
+      }
+
       if (filter.createdAtRange) {
         const [start, end] = filter.createdAtRange;
 
@@ -374,7 +382,7 @@ class AddressRepository {
     return { rows, count };
   }
 
-  static async findAllAutocomplete(search, limit, options: IRepositoryOptions) {
+  static async findAllAutocomplete(query, limit, options: IRepositoryOptions) {
     const currentTenant = MongooseRepository.getCurrentTenant(
       options,
     );
@@ -383,19 +391,27 @@ class AddressRepository {
       tenant: currentTenant.id,
     }];
 
-    if (search) {
+    if (query.search) {
       criteriaAnd.push({
         $or: [
           {
-            _id: MongooseQueryUtils.uuid(search),
+            _id: MongooseQueryUtils.uuid(query.search),
           },
           {
             label: {
-              $regex: MongooseQueryUtils.escapeRegExp(search),
+              $regex: MongooseQueryUtils.escapeRegExp(query.search),
               $options: 'i',
             }
           },          
         ],
+      });
+    }
+
+    if(query.createdBy) {
+      criteriaAnd.push({
+        createdBy: MongooseQueryUtils.uuid(
+            query.createdBy,
+        ),
       });
     }
 

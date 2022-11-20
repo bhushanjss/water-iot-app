@@ -97,9 +97,9 @@ export default class AddressService {
     return AddressRepository.findById(id, this.options);
   }
 
-  async findAllAutocomplete(search, limit) {
+  async findAllAutocomplete(query, limit) {
     return AddressRepository.findAllAutocomplete(
-      search,
+      query,
       limit,
       this.options,
     );
