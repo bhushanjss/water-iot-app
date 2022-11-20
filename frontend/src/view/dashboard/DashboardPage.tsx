@@ -1,4 +1,4 @@
-import { Grid, makeStyles } from '@material-ui/core';
+import {Button, Grid, makeStyles} from '@material-ui/core';
 import React, {useEffect} from 'react';
 import { i18n } from 'src/i18n';
 import DashboardBarChart from 'src/view/dashboard/DashboardBarChart';
@@ -13,12 +13,25 @@ import {useDispatch, useSelector} from "react-redux";
 import selectors from "../../modules/waterReading/list/waterReadingListSelectors";
 import actions from "../../modules/waterReading/list/waterReadingListActions";
 import DashboardService from "../../modules/dashboard/dashboardService";
+import addressSelectors from "../../modules/address/addressSelectors";
+import AddIcon from "@material-ui/icons/Add";
+import {Link} from "react-router-dom";
+import deviceSelectors from "../../modules/device/deviceSelectors";
 
 const useStyles = makeStyles((theme) => ({
   chartWrapper: {
     border: '1px solid rgb(224, 224, 224)',
     borderRadius: '5px',
     backgroundColor: '#fff',
+    padding: theme.spacing(2),
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  },
+  buttonWrapper: {
+    border: '1px solid rgb(224, 224, 224)',
+    borderRadius: '5px',
     padding: theme.spacing(2),
     display: 'flex',
     alignItems: 'center',
@@ -53,6 +66,15 @@ const conductivityReadings = DashboardService.getConductivityData(waterReadings)
 // const turbidityReadings = DashboardService.getTurbidityData(waterReadings);
 // const temperatureReadings = DashboardService.getTemperatureData(waterReadings);
 // const group1Readings = DashboardService.getGroup1Data(waterReadings);
+
+
+    const hasPermissionToCreateAddress = useSelector(
+        addressSelectors.selectPermissionToCreate,
+    );
+
+    const hasPermissionToCreateDevice = useSelector(
+        deviceSelectors.selectPermissionToCreate,
+    );
 
   return (
     <>
@@ -125,6 +147,36 @@ const conductivityReadings = DashboardService.getConductivityData(waterReadings)
           {/*    <DashboardRadarChart />*/}
           {/*  </div>*/}
           {/*</Grid>*/}
+          <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
+              {hasPermissionToCreateAddress && (
+                  <Button
+                      className={classes.buttonWrapper}
+                      variant="contained"
+                      color="primary"
+                      component={Link}
+                      to="/address/new"
+                      startIcon={<AddIcon />}
+                      size="small"
+                  >
+                      {i18n('dashboard.address')}
+                  </Button>
+              )}
+          </Grid>
+          <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
+              {hasPermissionToCreateDevice && (
+                  <Button
+                      className={classes.buttonWrapper}
+                      variant="contained"
+                      color="primary"
+                      component={Link}
+                      to="/device/new"
+                      startIcon={<AddIcon />}
+                      size="small"
+                  >
+                      {i18n('dashboard.device')}
+                  </Button>
+              )}
+          </Grid>
         </Grid>
 
         <p
