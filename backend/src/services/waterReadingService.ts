@@ -103,9 +103,9 @@ export default class WaterReadingService {
     return WaterReadingRepository.findById(id, this.options);
   }
 
-  async findAllAutocomplete(search, limit) {
+  async findAllAutocomplete(query, limit) {
     return WaterReadingRepository.findAllAutocomplete(
-      search,
+        query,
       limit,
       this.options,
     );
