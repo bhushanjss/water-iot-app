@@ -642,7 +642,9 @@ const en = {
   },
   dashboard: {
     menu: 'Dashboard',
-    message: `My Beautiful Wife Dona`,
+    message: `© 2022 Gaia Bharat. All rights reserved.`,
+    address: 'New Address',
+    device: 'New Device',
     charts: {
       day: 'Day',
       red: 'Red',
