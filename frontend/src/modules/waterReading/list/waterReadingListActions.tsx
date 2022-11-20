@@ -123,15 +123,15 @@ const waterReadingListActions = {
     dispatch(waterReadingListActions.doFetch(filter, rawFilter, true));
   },
 
-  doFetchUserDataFilter: (locationId: string) => async (
+  doFetchUserDataFilter: (filter?) => async (
       dispatch,
       getState
   ) => {
-    let filter = selectors.selectFilter(getState());
-    let rawFilter = selectors.selectRawFilter(getState());
-    filter = {...filter, location: locationId};
-    rawFilter = {...rawFilter, location: locationId};
-    dispatch(waterReadingListActions.doFetch(filter, rawFilter, true));
+    let filterNew = selectors.selectFilter(getState());
+    let rawFilterNew = selectors.selectRawFilter(getState());
+    filterNew = {...filterNew, ...filter};
+    rawFilterNew = {...rawFilterNew, ...filter};
+    dispatch(waterReadingListActions.doFetch(filterNew, rawFilterNew, true));
   },
 
   doFetch: (filter?, rawFilter?, keepPagination = false) => async (

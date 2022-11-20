@@ -52,9 +52,13 @@ function DashboardPage(props) {
   //   const locationId = "636feb3522dfe967052f85e1";
   //   const locationId = "636feb3422dfe967052f8526"; //OK
   //   const locationId = "636feb2e22dfe967052f81ec"; //Has TDS
+  const filter = {
+
+  };
+
   useEffect(() => {
       // dispatch( actions.doChangeAddSort({field: 'dateTime', order: 'asc'}));
-      dispatch(actions.doFetchUserDataFilter(locationId));
+      dispatch(actions.doFetchUserDataFilter(filter));
       // eslint-disable-next-line
   }, [dispatch]);
 
