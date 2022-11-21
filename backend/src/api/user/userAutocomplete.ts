@@ -4,6 +4,7 @@ import Permissions from '../../security/permissions';
 import UserRepository from '../../database/repositories/userRepository';
 
 export default async (req, res) => {
+  const queryLimit = 20;
   try {
     new PermissionChecker(req).validateHas(
       Permissions.values.userAutocomplete,
@@ -11,7 +12,7 @@ export default async (req, res) => {
 
     const payload = await UserRepository.findAllAutocomplete(
       req.query.query,
-      req.query.limit,
+      req.query.limit || queryLimit,
       req,
     );
 
