@@ -76,7 +76,7 @@ function DashboardPage(props) {
   }, [dispatch]);
 
 const addressList:Array<any> = useSelector(addressListSelectors.selectRows);
-let addressRecord = {};
+let addressRecord;
 if(addressList.length>0) {
     addressRecord = addressList[0];
 }
@@ -171,38 +171,42 @@ const conductivityReadings = DashboardService.getConductivityData(waterReadings)
           {/*  </div>*/}
           {/*</Grid>*/}
           <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
-            <AddressView className={classes.addressWrapper} record={addressRecord} />
+            {addressRecord && (
+              <AddressView className={classes.addressWrapper} record={addressRecord} />
+            )
+            }
           </Grid>
-          <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
-              {hasPermissionToCreateAddress && (
-                  <Button
-                      className={classes.buttonWrapper}
-                      variant="contained"
-                      color="primary"
-                      component={Link}
-                      to="/address/new"
-                      startIcon={<AddIcon />}
-                      size="small"
-                  >
-                      {i18n('dashboard.address')}
-                  </Button>
-              )}
-          </Grid>
-          <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
-              {hasPermissionToCreateDevice && (
-                  <Button
-                      className={classes.buttonWrapper}
-                      variant="contained"
-                      color="primary"
-                      component={Link}
-                      to="/device/new"
-                      startIcon={<AddIcon />}
-                      size="small"
-                  >
-                      {i18n('dashboard.device')}
-                  </Button>
-              )}
-          </Grid>
+          {hasPermissionToCreateAddress && !addressRecord && (
+            <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
+              <Button
+                  className={classes.buttonWrapper}
+                  variant="contained"
+                  color="primary"
+                  component={Link}
+                  to="/address/new"
+                  startIcon={<AddIcon />}
+                  size="small"
+              >
+                  {i18n('dashboard.address')}
+              </Button>
+            </Grid>
+          )}
+
+          {hasPermissionToCreateDevice && (
+              <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
+              <Button
+                  className={classes.buttonWrapper}
+                  variant="contained"
+                  color="primary"
+                  component={Link}
+                  to="/device/new"
+                  startIcon={<AddIcon />}
+                  size="small"
+              >
+                  {i18n('dashboard.device')}
+              </Button>
+              </Grid>
+          )}
         </Grid>
 
         <p
