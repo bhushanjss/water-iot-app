@@ -6,10 +6,15 @@ import UserViewItem from 'src/view/user/view/UserViewItem';
 
 function AddressView(props) {
   const renderView = () => {
-    const { record } = props;
+    const { record, className } = props;
 
     return (
-      <div>
+      <div className={className}>
+        <TextViewItem
+          label={i18n('entities.address.fields.label')}
+          value={record.label}
+        />
+
         <TextViewItem
           label={i18n('entities.address.fields.address1')}
           value={record.address1}
@@ -41,29 +46,24 @@ function AddressView(props) {
         />
 
         <TextViewItem
-          label={i18n('entities.address.fields.coords')}
-          value={record.coords}
-        />
-
-        <TextViewItem
           label={i18n('entities.address.fields.pin')}
           value={record.pin}
         />
 
         <TextViewItem
-          label={i18n('entities.address.fields.label')}
-          value={record.label}
+          label={i18n('entities.address.fields.coords')}
+          value={record.coords}
         />
 
-        <UserViewItem
-          label={i18n('entities.address.fields.user')}
-          value={record.user}
-        />        
+        {/*<UserViewItem*/}
+        {/*  label={i18n('entities.address.fields.user')}*/}
+        {/*  value={record.user}*/}
+        {/*/>        */}
       </div>
     );
   };
 
-  const { record, loading } = props;
+  const { record, loading, className  } = props;
 
   if (loading || !record) {
     return <Spinner />;

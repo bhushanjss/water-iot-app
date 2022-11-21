@@ -10,13 +10,16 @@ import DashboardMixChartTwo from 'src/view/dashboard/DashboardMixChartTwo';
 import DashboardPolarChart from 'src/view/dashboard/DashboardPolarChart';
 import DashboardRadarChart from 'src/view/dashboard/DashboardRadarChart';
 import {useDispatch, useSelector} from "react-redux";
-import selectors from "../../modules/waterReading/list/waterReadingListSelectors";
-import actions from "../../modules/waterReading/list/waterReadingListActions";
+import waterReadingSelector from "../../modules/waterReading/list/waterReadingListSelectors";
 import DashboardService from "../../modules/dashboard/dashboardService";
 import addressSelectors from "../../modules/address/addressSelectors";
 import AddIcon from "@material-ui/icons/Add";
 import {Link} from "react-router-dom";
 import deviceSelectors from "../../modules/device/deviceSelectors";
+import waterReadingListActions from "../../modules/waterReading/list/waterReadingListActions";
+import addressListActions from "../../modules/address/list/addressListActions";
+import addressListSelectors from "../../modules/address/list/addressListSelectors";
+import AddressView from "../address/view/AddressView";
 
 const useStyles = makeStyles((theme) => ({
   chartWrapper: {
@@ -25,6 +28,15 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#fff',
     padding: theme.spacing(2),
     display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  },
+  addressWrapper: {
+    border: '1px solid rgb(224, 224, 224)',
+    borderRadius: '5px',
+    backgroundColor: '#fff',
+    padding: theme.spacing(2),
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
@@ -43,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 function DashboardPage(props) {
   const classes = useStyles();
 
-  const rawFilter = useSelector(selectors.selectRawFilter);
+  const rawFilter = useSelector(waterReadingSelector.selectRawFilter);
   const dispatch = useDispatch();
   // const locationId = "636feb4d22dfe967052f9451"; //Robertsganj
   // const locationId = "636feb8a22dfe967052fbb35"; //Anpara
@@ -58,11 +70,18 @@ function DashboardPage(props) {
 
   useEffect(() => {
       // dispatch( actions.doChangeAddSort({field: 'dateTime', order: 'asc'}));
-      dispatch(actions.doFetchUserDataFilter(filter));
+      dispatch(waterReadingListActions.doFetchUserDataFilter(filter));
+      dispatch(addressListActions.doFetchCurrentFilter());
       // eslint-disable-next-line
   }, [dispatch]);
 
-const waterReadings:Array<any> = useSelector(selectors.selectRows);
+const addressList:Array<any> = useSelector(addressListSelectors.selectRows);
+let addressRecord = {};
+if(addressList.length>0) {
+    addressRecord = addressList[0];
+}
+
+const waterReadings:Array<any> = useSelector(waterReadingSelector.selectRows);
 const waterReadingDesc = waterReadings.reverse();
 const tdsReadings = DashboardService.getTDSData(waterReadings);
 const pHReadings = DashboardService.getpHData(waterReadings);
@@ -151,6 +170,9 @@ const conductivityReadings = DashboardService.getConductivityData(waterReadings)
           {/*    <DashboardRadarChart />*/}
           {/*  </div>*/}
           {/*</Grid>*/}
+          <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
+            <AddressView className={classes.addressWrapper} record={addressRecord} />
+          </Grid>
           <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
               {hasPermissionToCreateAddress && (
                   <Button
