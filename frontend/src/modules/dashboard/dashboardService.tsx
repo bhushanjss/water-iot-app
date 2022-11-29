@@ -1,3 +1,4 @@
+import normalLevel from "../shared/constants";
 
 const separateItems = (readings: Array<any>, categories: Array<string>) => {
     let results = {
@@ -91,6 +92,13 @@ const splitDataGroup1 = (readings: Array<any>) => {
     return data;
 }
 
+function getMinMax(category: string, length: number) {
+    const {min, max} = normalLevel[category];
+    const minRange = Array(length).fill(min);
+    const maxRange = Array(length).fill(max);
+    return {minRange, maxRange};
+}
+
 export default class DashboardService {
 
     static getGroup1Data(waterReadings: Array<any>) {
@@ -130,11 +138,15 @@ export default class DashboardService {
 
     static getTDSData(waterReadings: Array<any>) {
         const readingList = separateItems(waterReadings, ['tds']);
+
+        const minMaxRange = getMinMax('tds', readingList['tds'].length);
+        const {minRange, maxRange} = minMaxRange;
+
         const data = {
             labels: readingList.labels,
             datasets: [
                 {
-                    label: 'TDS',
+                    label: 'Min TDS',
                     fill: false,
                     lineTension: 0.1,
                     backgroundColor: 'rgba(192,122,75,0.4)',
@@ -152,7 +164,49 @@ export default class DashboardService {
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
+                    data: minRange,
+                },
+                {
+                    label: 'TDS',
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: 'rgb(190,191,166)',
+                    borderColor: 'rgb(233,216,92)',
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: 'rgb(128,192,75)',
+                    pointBackgroundColor: '#fff',
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: 'rgb(85,192,75)',
+                    pointHoverBorderColor: 'rgba(220,220,220,1)',
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
                     data: readingList['tds'],
+                },
+                {
+                    label: 'Max TDS',
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: 'rgb(226,35,70)',
+                    borderColor: 'rgb(156,144,58)',
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: 'rgb(128,192,75)',
+                    pointBackgroundColor: '#fff',
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: 'rgb(85,192,75)',
+                    pointHoverBorderColor: 'rgba(220,220,220,1)',
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: maxRange,
                 }
             ],
         };
