@@ -127,6 +127,15 @@ function AddressListTable(props) {
                 )}
               </TableCellCustom>
               <TableCellCustom
+                  onSort={doChangeSort}
+                  hasRows={hasRows}
+                  sorter={sorter}
+                  name={'Id'}
+                  label={i18n(
+                      'entities.address.fields.id',
+                  )}
+              />
+              <TableCellCustom
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
@@ -252,6 +261,7 @@ function AddressListTable(props) {
                       size="small"
                     />
                   </TableCell>
+                  <TableCell>{row.id}</TableCell>
                 <TableCell>{row.address1}</TableCell>
                 <TableCell>{row.address2}</TableCell>
                 <TableCell>{row.city}</TableCell>

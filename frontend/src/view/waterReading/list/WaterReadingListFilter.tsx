@@ -41,6 +41,9 @@ const schema = yup.object().shape({
   location: yupFilterSchemas.relationToOne(
       i18n('entities.waterReading.fields.location'),
   ),
+  location1: yupFilterSchemas.string(
+      i18n('entities.waterReading.fields.location1'),
+  ),
   dateTimeRange: yupFilterSchemas.datetimeRange(
     i18n('entities.waterReading.fields.dateTimeRange'),
   ),
@@ -152,6 +155,7 @@ const emptyValues = {
   user: null,
   device: null,
   location: null,
+  location1: null,
   dateTimeRange: [],
   type: null,
   source: null,
@@ -201,6 +205,10 @@ const previewRenders = {
   location: {
     label: i18n('entities.waterReading.fields.location'),
     render: filterRenders.relationToOne(),
+  },
+  location1: {
+    label: i18n('entities.waterReading.fields.location'),
+    render: filterRenders.generic(),
   },
   dateTimeRange: {
     label: i18n('entities.waterReading.fields.dateTimeRange'),
@@ -369,7 +377,12 @@ function WaterReadingListFilter(props) {
 
   const onSubmit = (values) => {
     const rawValues = form.getValues();
-    dispatch(actions.doFetch(values, rawValues));
+    const {location, location1} = rawValues;
+    let newRawValues = rawValues;
+    if(location1) {
+      newRawValues = {...newRawValues, location: { id: location1}}
+    }
+    dispatch(actions.doFetch(values, newRawValues));
     setExpanded(false);
   };
 
@@ -419,6 +432,18 @@ function WaterReadingListFilter(props) {
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
+                  <AddressAutocompleteFormItem
+                      name="location"
+                      label={i18n('entities.person.fields.location')}
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <InputFormItem
+                      name="location1"
+                      label={i18n('entities.waterReading.fields.location')}
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
                   <DatePickerRangeFormItem
                     name="dateTimeRange"
                     label={i18n('entities.waterReading.fields.dateTimeRange')}    
@@ -453,12 +478,12 @@ function WaterReadingListFilter(props) {
                     )}
                   />
                 </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputFormItem
-                    name="remark"
-                    label={i18n('entities.waterReading.fields.remark')}      
-                  />
-                </Grid>
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputFormItem*/}
+                {/*    name="remark"*/}
+                {/*    label={i18n('entities.waterReading.fields.remark')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
                 <Grid item lg={6} xs={12}>
                   <InputRangeFormItem
                     name="temperatureRange"
@@ -501,150 +526,150 @@ function WaterReadingListFilter(props) {
                     label={i18n('entities.waterReading.fields.turbidityRange')}      
                   />
                 </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="oxygenRange"
-                    label={i18n('entities.waterReading.fields.oxygenRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="calciumRange"
-                    label={i18n('entities.waterReading.fields.calciumRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="magnesiumRange"
-                    label={i18n('entities.waterReading.fields.magnesiumRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="sodiumRange"
-                    label={i18n('entities.waterReading.fields.sodiumRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="potassiumRange"
-                    label={i18n('entities.waterReading.fields.potassiumRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="ironRange"
-                    label={i18n('entities.waterReading.fields.ironRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="chlorineRange"
-                    label={i18n('entities.waterReading.fields.chlorineRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="carbonateRange"
-                    label={i18n('entities.waterReading.fields.carbonateRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="bicarbonateRange"
-                    label={i18n('entities.waterReading.fields.bicarbonateRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="chlorideRange"
-                    label={i18n('entities.waterReading.fields.chlorideRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="sulphateRange"
-                    label={i18n('entities.waterReading.fields.sulphateRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="manganeseRange"
-                    label={i18n('entities.waterReading.fields.manganeseRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="nitrateRange"
-                    label={i18n('entities.waterReading.fields.nitrateRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="fluorideRange"
-                    label={i18n('entities.waterReading.fields.fluorideRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="silicateRange"
-                    label={i18n('entities.waterReading.fields.silicateRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="phosphateRange"
-                    label={i18n('entities.waterReading.fields.phosphateRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="arsenicRange"
-                    label={i18n('entities.waterReading.fields.arsenicRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="copperRange"
-                    label={i18n('entities.waterReading.fields.copperRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="cadmiumRange"
-                    label={i18n('entities.waterReading.fields.cadmiumRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="seleniumRange"
-                    label={i18n('entities.waterReading.fields.seleniumRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="mercuryRange"
-                    label={i18n('entities.waterReading.fields.mercuryRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="leadRange"
-                    label={i18n('entities.waterReading.fields.leadRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="zincRange"
-                    label={i18n('entities.waterReading.fields.zincRange')}      
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputRangeFormItem
-                    name="boronRange"
-                    label={i18n('entities.waterReading.fields.boronRange')}      
-                  />
-                </Grid>
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="oxygenRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.oxygenRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="calciumRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.calciumRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="magnesiumRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.magnesiumRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="sodiumRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.sodiumRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="potassiumRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.potassiumRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="ironRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.ironRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="chlorineRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.chlorineRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="carbonateRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.carbonateRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="bicarbonateRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.bicarbonateRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="chlorideRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.chlorideRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="sulphateRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.sulphateRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="manganeseRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.manganeseRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="nitrateRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.nitrateRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="fluorideRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.fluorideRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="silicateRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.silicateRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="phosphateRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.phosphateRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="arsenicRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.arsenicRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="copperRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.copperRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="cadmiumRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.cadmiumRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="seleniumRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.seleniumRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="mercuryRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.mercuryRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="leadRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.leadRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="zincRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.zincRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item lg={6} xs={12}>*/}
+                {/*  <InputRangeFormItem*/}
+                {/*    name="boronRange"*/}
+                {/*    label={i18n('entities.waterReading.fields.boronRange')}      */}
+                {/*  />*/}
+                {/*</Grid>*/}
               </Grid>
 
               <FilterButtons>
