@@ -228,7 +228,7 @@ bool login() {
        Serial.println("\nUnauthroized, check username and password ");
    }
    if(statusCode == 200) {
-       Serial.println("\n Successfully sent the readings");
+//        Serial.println("\n Successfully login to the App");
        jwt_token = client.responseBody();
        return true;
    }
@@ -255,7 +255,7 @@ void sendReadings() {
             client.sendHeader("Content-Type", "application/json");
             client.sendHeader("Authorization", token);
             client.beginBody();
-            client.print(body);
+            client.print(readingBody);
             client.endRequest();
             int statusCode = client.responseStatusCode();
             if(statusCode == 401) { //problem in credentials
